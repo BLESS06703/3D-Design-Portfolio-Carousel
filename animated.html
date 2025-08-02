@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Design Portfolio Carousel</title>
+    <style>
+        :root {
+            --primary-color: #6c5ce7;
+            --secondary-color: #a29bfe;
+            --text-color: #fff;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            perspective: 1200px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #2d3436;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+        
+        .header p {
+            color: #636e72;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .carousel-container {
+            position: relative;
+            width: 320px;
+            height: 320px;
+            margin: 20px 0 40px;
+        }
+
+        .carousel {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        .carousel-item {
+            position: absolute;
+            width: 240px;
+            height: 240px;
+            left: 40px;
+            top: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: all 0.6s ease;
+            overflow: hidden;
+            cursor: pointer;
+            transform-origin: center center;
+        }
+
+        .carousel-item:hover {
+            transform: scale(1.05) !important;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .carousel-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .carousel-item h2 {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            color: var(--text-color);
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.6);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin: 0;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+
+        .carousel-item:hover h2 {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 24px;
+            color: var(--primary-color);
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .carousel-btn:hover {
+            background: white;
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .prev {
+            left: -70px;
+        }
+
+        .next {
+            right: -70px;
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 14px;
+            height: 14px;
+            background: var(--secondary-color);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0.5;
+        }
+
+        .dot.active {
+            background: var(--primary-color);
+            opacity: 1;
+            transform: scale(1.2);
+        }
+
+        .footer {
+            margin-top: 40px;
+            color: #636e72;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        @media (max-width: 500px) {
+            .carousel-container {
+                width: 280px;
+                height: 280px;
+            }
+            
+            .carousel-item {
+                width: 200px;
+                height: 200px;
+                left: 40px;
+                top: 40px;
+            }
+            
+            .carousel-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+            
+            .prev {
+                left: -50px;
+            }
+            
+            .next {
+                right: -50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Design Portfolio</h1>
+        <p>Explore my creative work in this interactive 3D carousel</p>
+    </div>
+
+    <div class="carousel-container">
+        <div class="carousel">
+            <div class="carousel-item">
+                <img src="images/bk.jpg" alt="Branding Design">
+                <h2>Branding Design</h2>
+            </div>
+            <div class="carousel-item">
+                <img src="images/svgg.jpg" alt="Vector Art">
+                <h2>Vector Art</h2>
+            </div>
+            <div class="carousel-item">
+                <img src="images/fb.jpg" alt="Social Media">
+                <h2>Social Media</h2>
+            </div>
+            <div class="carousel-item">
+                <img src="images/img.jpg" alt="Web Design">
+                <h2>Web Design</h2>
+            </div>
+            <div class="carousel-item">
+                <img src="images/jgp.jpg" alt="Print Design">
+                <h2>Print Design</h2>
+            </div>
+            <div class="carousel-item">
+                <img src="images/png.jpg" alt="Illustration">
+                <h2>Illustration</h2>
+            </div>
+        </div>
+        <button class="carousel-btn prev" aria-label="Previous">◀</button>
+        <button class="carousel-btn next" aria-label="Next">▶</button>
+    </div>
+    <div class="carousel-dots"></div>
+
+    <div class="footer">
+        <p>Click or swipe to navigate • Hover for details</p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const carousel = document.querySelector('.carousel');
+            const items = document.querySelectorAll('.carousel-item');
+            const prevBtn = document.querySelector('.prev');
+            const nextBtn = document.querySelector('.next');
+            const dotsContainer = document.querySelector('.carousel-dots');
+            
+            let currentAngle = 0;
+            const itemCount = items.length;
+            const angle = 360 / itemCount;
+            let autoRotate;
+            let isAnimating = false;
+            
+            // Initialize carousel
+            function setupCarousel() {
+                for (let i = 0; i < itemCount; i++) {
+                    const item = items[i];
+                    const itemAngle = angle * i;
+                    
+                    item.style.transform = `rotateY(${itemAngle}deg) translateZ(300px)`;
+                    item.style.opacity = i === 0 ? '1' : '0.7';
+                    item.style.zIndex = i === 0 ? '1' : '0';
+                    
+                    // Create dots
+                    const dot = document.createElement('span');
+                    dot.classList.add('dot');
+                    if (i === 0) dot.classList.add('active');
+                    dot.addEventListener('click', () => {
+                        if (isAnimating) return;
+                        goToSlide(i);
+                    });
+                    dotsContainer.appendChild(dot);
+                }
+            }
+            
+            // Rotate carousel
+            function rotateCarousel(direction) {
+                if (isAnimating) return;
+                
+                isAnimating = true;
+                currentAngle += angle * direction;
+                carousel.style.transform = `rotateY(${currentAngle}deg)`;
+                
+                setTimeout(() => {
+                    isAnimating = false;
+                }, 800); // Match this with CSS transition duration
+                
+                updateActiveItem();
+            }
+            
+            // Go to specific slide
+            function goToSlide(index) {
+                if (isAnimating) return;
+                
+                isAnimating = true;
+                const targetAngle = -angle * index;
+                currentAngle = targetAngle;
+                carousel.style.transform = `rotateY(${currentAngle}deg)`;
+                
+                setTimeout(() => {
+                    isAnimating = false;
+                }, 800);
+                
+                updateActiveItem();
+            }
+            
+            // Update active item and dots
+            function updateActiveItem() {
+                const frontIndex = ((-currentAngle / angle) % itemCount + itemCount) % itemCount;
+                
+                items.forEach((item, index) => {
+                    item.style.opacity = index === frontIndex ? '1' : '0.7';
+                    item.style.zIndex = index === frontIndex ? '1' : '0';
+                    item.style.transform = `rotateY(${angle * index}deg) translateZ(300px)`;
+                });
+                
+                document.querySelectorAll('.dot').forEach((dot, index) => {
+                    dot.classList.toggle('active', index === frontIndex);
+                });
+            }
+            
+            // Auto-rotation
+            function startAutoRotation() {
+                autoRotate = setInterval(() => {
+                    if (!isAnimating) {
+                        rotateCarousel(-1);
+                    }
+                }, 4000);
+            }
+            
+            // Event listeners
+            prevBtn.addEventListener('click', () => {
+                clearInterval(autoRotate);
+                rotateCarousel(1);
+                startAutoRotation();
+            });
+            
+            nextBtn.addEventListener('click', () => {
+                clearInterval(autoRotate);
+                rotateCarousel(-1);
+                startAutoRotation();
+            });
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') {
+                    clearInterval(autoRotate);
+                    rotateCarousel(1);
+                    startAutoRotation();
+                }
+                if (e.key === 'ArrowRight') {
+                    clearInterval(autoRotate);
+                    rotateCarousel(-1);
+                    startAutoRotation();
+                }
+            });
+            
+            // Touch support
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            carousel.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+                clearInterval(autoRotate);
+            }, { passive: true });
+            
+            carousel.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                if (touchEndX < touchStartX - 50 && !isAnimating) {
+                    rotateCarousel(-1);
+                }
+                if (touchEndX > touchStartX + 50 && !isAnimating) {
+                    rotateCarousel(1);
+                }
+                startAutoRotation();
+            }, { passive: true });
+            
+            // Click on items
+            items.forEach(item => {
+                item.addEventListener('click', (e) => {
+                    if (e.target === item || e.target === item.querySelector('img')) {
+                        // Add your click action here, like opening a lightbox
+                        console.log('Item clicked:', item.querySelector('h2').textContent);
+                    }
+                });
+            });
+            
+            // Pause on hover
+            carousel.addEventListener('mouseenter', () => clearInterval(autoRotate));
+            carousel.addEventListener('mouseleave', startAutoRotation);
+            
+            // Initialize
+            setupCarousel();
+            startAutoRotation();
+        });
+    </script>
+</body>
+</html>
